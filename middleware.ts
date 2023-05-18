@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function middleware(req: NextRequest) {
   const token:any = req.cookies.get("USER_LOGIN")?.valueOf();
 
+  console.log(req.cookies.get("USER_LOGIN")?.valueOf(),'req.cookies.get("USER_LOGIN")?.valueOf()')
   const verifiedToken = token && (await verifyAuth(token.replace('"', "")).catch((err: any) => { }));
   if (req.nextUrl.pathname.startsWith("/login") && !verifiedToken) {
     return NextResponse.next();
